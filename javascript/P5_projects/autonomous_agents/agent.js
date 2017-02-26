@@ -7,7 +7,8 @@ function Agent(x, y) {
 
     this.maxspeed = random(5, 10);
     this.maxforce = 0.1;
-    this.radius = 3;    
+    this.radius = 15;    
+    this.symbol = String.fromCharCode(0x3040 + round(random(0, 96)));
     
     this.setPosition = function(x, y) {
         this.position = createVector(x, y);
@@ -53,12 +54,13 @@ function Agent(x, y) {
         var force = flowField.vectors[index];
         this.applyForce(force);
         
-        stroke(map(this.position.x, 0, width, 150, 255),
-               map(this.position.x, 0, width, 0, 200),
-               map(this.position.x, 0, width, 124, 155));
-        strokeWeight(2);
+        stroke(map(this.position.x, width, 0, 255, 0),
+               map(this.position.x, width, 0, 255, 0),
+               map(this.position.x, width, 0, 100, 60));
+        strokeWeight(1);
         this.pre.add(10);
-        line(this.position.x, this.position.y, this.pre.x * 1.01, this.pre.y * 1.001);
+        text(this.symbol, this.position.x, this.position.y);
+        //line(this.position.x, this.position.y, this.pre.x * 1.01, this.pre.y * 1.001);
     }
     
     
@@ -89,6 +91,8 @@ function Agent(x, y) {
     this.display = function() {
         strokeWeight(0);
         //ellipse(this.position.x, this.position.y, this.radius, this.radius);
-        rect(this.position.x, this.position.y, this.radius, this.radius);
+        textSize(this.radius);
+        text(this.symbol, this.position.x, this.position.y);
+        //rect(this.position.x, this.position.y, this.radius, this.radius);
     }
 }

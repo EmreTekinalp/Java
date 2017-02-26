@@ -8,7 +8,8 @@ var check = false;
 var pts;
 var up = 0;
 var field;
-var sample = 0.2
+var sample = 0.08;
+var fontsize = 128;
 
 function preload() {
     font = loadFont('RawengulkSans-094.otf')
@@ -17,11 +18,12 @@ function preload() {
 
 function setup() {
     createCanvas(600, 400);
+    background(0);
     field = new FlowField(20);
     field.setup();
     pts = new Array();
     // create dots at text contour
-    dots = font.textToPoints(word2, 100, height * 0.5, 128, {sampleFactor: sample});
+    dots = font.textToPoints(word2, 100, height * 0.5, fontsize, {sampleFactor: sample});
     for (var i=0; i<600; i++) {
         particles[i] = new Particle();
     }
@@ -33,7 +35,7 @@ function setup() {
 
 function mousePressed() {
     if (check == false) {
-        word1_dots = font.textToPoints(word1, 60, height * 0.5, 128, {sampleFactor: sample});
+        word1_dots = font.textToPoints(word1, 60, height * 0.5, fontsize, {sampleFactor: sample});
         var diff = abs(word1_dots.length - agents.length);
 
         if (diff > 0) {
@@ -54,7 +56,7 @@ function mousePressed() {
         check = true;    
     }
     else {
-        word2_dots = font.textToPoints(word2, 100, height * 0.5, 128, {sampleFactor: sample});
+        word2_dots = font.textToPoints(word2, 100, height * 0.5, fontsize, {sampleFactor: sample});
         var diff = abs(word2_dots.length - agents.length);
 
         if (diff > 0) {
@@ -78,7 +80,7 @@ function mousePressed() {
 
 function draw() {
     // draw the background and the text
-    background(0);
+    background(0, 99);
     
     // flowField
     field.display();
